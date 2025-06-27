@@ -3,16 +3,17 @@
   "version": "1.100.0",
   "private": true,
   "engines": {
-    "node": ">=22.16",
-    "pnpm": ">=10.2.1"
+    "node": ">=18.0.0",
+    "pnpm": ">=10.2.1",
+    "npm": ">=9.0.0"
   },
   "packageManager": "pnpm@10.12.1",
   "scripts": {
     "prepare": "node scripts/prepare.mjs",
     "preinstall": "node scripts/block-npm-install.js",
-    "build": "turbo run build",
-    "build:backend": "turbo run build:backend",
-    "build:frontend": "turbo run build:frontend",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "npm run build --workspace=n8n",
+    "build:frontend": "npm run build --workspace=@n8n/editor-ui",
     "build:nodes": "turbo run build:nodes",
     "build:n8n": "node scripts/build-n8n.mjs",
     "build:docker": "node scripts/build-n8n.mjs && node scripts/dockerize-n8n.mjs",
@@ -36,7 +37,7 @@
     "lint:nodes": "turbo run lint:nodes",
     "lint:frontend": "turbo run lint:frontend",
     "optimize-svg": "find ./packages -name '*.svg' ! -name 'pipedrive.svg' -print0 | xargs -0 -P16 -L20 npx svgo",
-    "start": "run-script-os",
+    "start": "n8n start",
     "start:default": "cd packages/cli/bin && ./n8n",
     "start:tunnel": "./packages/cli/bin/n8n start --tunnel",
     "start:windows": "cd packages/cli/bin && n8n",
