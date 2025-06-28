@@ -11,9 +11,9 @@
   "scripts": {
     "prepare": "node scripts/prepare.mjs",
     "preinstall": "node scripts/block-npm-install.js",
-    "build": "npm run build:backend && npm run build:frontend",
-    "build:backend": "npm run build --workspace=n8n",
-    "build:frontend": "npm run build --workspace=@n8n/editor-ui",
+    "build": "pnpm run build:backend && pnpm run build:frontend", // <-- Эту строку тоже меняем на pnpm run
+    "build:backend": "pnpm run build --workspace=n8n", // <-- ИЗМЕНИТЕ ЭТУ СТРОКУ
+    "build:frontend": "pnpm run build --workspace=@n8n/editor-ui", // <-- ИЗМЕНИТЕ ЭТУ СТРОКУ
     "build:nodes": "turbo run build:nodes",
     "build:n8n": "node scripts/build-n8n.mjs",
     "build:docker": "node scripts/build-n8n.mjs && node scripts/dockerize-n8n.mjs",
@@ -48,7 +48,7 @@
     "watch": "turbo run watch --parallel",
     "webhook": "./packages/cli/bin/n8n webhook",
     "worker": "./packages/cli/bin/n8n worker"
-  },
+},
   "devDependencies": {
     "@biomejs/biome": "^1.9.0",
     "@n8n/eslint-config": "workspace:*",
